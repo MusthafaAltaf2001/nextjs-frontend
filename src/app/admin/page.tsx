@@ -68,6 +68,23 @@ const page = () => {
             })
     }
 
+    const rejectJoke = async (id: string) => {
+        // Find id of joke in jokeChanges
+        const index = jokes.findIndex((joke) => joke._id === id)
+
+        await axios.post(`${BASE_URL}/rejectJoke`, {
+            id: id,
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                console.log(res.data)
+                fetchJokes()
+            })
+    }
+
     const addNewJokeType = async () => {
         try {
             await axios.post(`${DELIVER_JOKES_URL}/jokes/newJokeType`, { type: newJokeType })
@@ -115,7 +132,10 @@ const page = () => {
 
 
     return (
-        <div className="bg-gray-900 px-4 h-screen">
+        <div className="bg-gray-900 px-4 min-h-screen">
+            <header>
+                <title>Admin</title>
+            </header>
             <h1 className="text-2xl font-bold mb-5">Admin</h1>
             <div className="border rounded-lg overflow-hidden w-full">
                 <table className='w-full'>
@@ -182,7 +202,7 @@ const page = () => {
                                         size="sm"
                                         variant="outline"
                                         className='bg-red-800 w-full hover:bg-red-700 rounded-2xl p-1 transition duration-300'
-                                        onClick={() => handleModeration(joke.id, 'reject')}
+                                        onClick={() => { rejectJoke(joke._id) }}
                                         disabled={joke.status !== 'PENDING'}
                                     >
                                         Reject

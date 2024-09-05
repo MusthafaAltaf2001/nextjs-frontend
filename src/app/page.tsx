@@ -37,7 +37,11 @@ export default function page() {
     try {
       await axios.post(`${DELIVER_JOKES_URL}/jokes/random`, { type: jokeType.joke_type_id })
         .then(res => {
-          setRetrievedJoke(res.data.content)
+          if (res.data.content === "") {
+            setRetrievedJoke("No Jokes Available in this category")
+          } else {
+            setRetrievedJoke(res.data.content)
+          }
         })
     } catch (e) {
       console.log(e)
