@@ -4,7 +4,9 @@
 
 2. For the Next.js frontend, run the command 'npm run start' and open your browser in localhost:3000
 
-3. For each microservice, run the command 'npm run start' to fire up all the microservices and http server
+3. For the Submit jokes and Deliver jokes microservice, run the command 'npm run start' to fire up all the microservices and http server
+
+4. For the Moderate Jokes Express server, run the commad 'nodemon index.js' to fire up the server
 
 
 AI Tools used
