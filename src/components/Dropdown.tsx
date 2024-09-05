@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const Dropdown = ({ options, setSelectedJokeType }: { options: any, setSelectedJokeType: any }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState(options[0]);
+    const [isSelected, setIsSelected] = useState(false);
     const [index, setIndex] = useState(0)
 
     const toggleDropdown = () => setIsOpen(!isOpen);
@@ -16,11 +17,12 @@ const Dropdown = ({ options, setSelectedJokeType }: { options: any, setSelectedJ
         setSelected(option);
         // setSelectedVariation(variations[getIndex(option)]);
         setSelectedJokeType(option);
+        setIsSelected(true)
         setIsOpen(false);
     };
 
     return (
-        <div className="relative inline-block text-left">
+        <div className="relative inline-block text-left z-10">
             <div>
                 <button
                     type="button"
@@ -30,7 +32,7 @@ const Dropdown = ({ options, setSelectedJokeType }: { options: any, setSelectedJ
                     aria-haspopup="true"
                     onClick={toggleDropdown}
                 >
-                    {selected}
+                    {isSelected ? selected?.joke_type_text : 'Select a Joke Type'}
                     <svg
                         className="-mr-1 ml-2 h-5 w-5"
                         xmlns="http://www.w3.org/2000/svg"
@@ -49,12 +51,12 @@ const Dropdown = ({ options, setSelectedJokeType }: { options: any, setSelectedJ
 
             {isOpen && (
                 <div
-                    className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-700 text-gray-100 border-gray-600 ring-1 ring-black ring-opacity-5"
+                    className="z-9999 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-700 text-gray-100 border-gray-600 ring-1 ring-black ring-opacity-5"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="options-menu"
                 >
-                    <div className="py-1" role="none">
+                    <div className="py-1 z-9999" role="none">
                         {options.map((option: any) => (
                             <button
                                 key={option}
@@ -62,7 +64,7 @@ const Dropdown = ({ options, setSelectedJokeType }: { options: any, setSelectedJ
                                 className="block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900 hover:transition hover:duration-500 w-full text-left rounded-2xl"
                                 role="menuitem"
                             >
-                                {option}
+                                {option.joke_type_text}
                             </button>
                         ))}
                     </div>
