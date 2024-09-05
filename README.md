@@ -7,7 +7,6 @@
 3. For each microservice, run the command 'npm run start' to fire up all the microservices and http server
 
 
-
 AI Tools used
 - ChatGPT (Of course! How can I resist it)
 - Codeium (Github CoPilot alternative)
